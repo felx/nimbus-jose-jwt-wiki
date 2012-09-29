@@ -74,6 +74,12 @@ else
 System.out.println("Recovered payload message: " + jwsObject.getPayload());
 }}}
 
+== JavaDocs are your friend ==
+
+The library code comes with complete JavaDocs which can help you discover and exploit many special features. You can get them in the download package or browse them online.
+
+http://nimbusds.com/files/jose-jwt/javadoc/
+
 == Related IETF drafts ==
 
         * [JWA] draft-ietf-jose-json-web-algorithms-05
