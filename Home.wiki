@@ -1,35 +1,99 @@
-= Welcome =
+= Nimbus JOSE+JWT =
 
-Welcome to your wiki! This is the default page we've installed for your convenience. Go ahead and edit it.
+Nimbus JOSE+JWT is a comprehensive Java implementation of the Javascript Object Signing and Encryption (JOSE) spec suite and the closely related JSON Web Token (JWT) spec. 
 
-== Wiki features ==
+== Supported JOSE and JWT objects ==
 
-This wiki uses the [[http://www.wikicreole.org/|Creole]] syntax, and is fully compatible with the 1.0 specification.
+The library supports creating, querying, serialising and parsing of the 
+following JOSE and JWT objects:
 
-The wiki itself is actually a git repository, which means you can clone it, edit it locally/offline, add images or any other file type, and push it back to us. It will be live immediately.
+	* Plain (unsecured) JOSE objects.
+	
+	* JSON Web Signature (JWS) objects.
+	
+	* JSON Web Encryption (JWE) objects.
+	
+	* JSON Web Key (JWK) objects and JSON Web Key (JWK) Sets.
+	
+	* Plain, signed and encrypted JSON Web Tokens (JWTs).
 
-Go ahead and try:
+== Fully decoupled JOSE/JWT object representation from crypto algorithm implementation ==
+
+The JOSE and JWT object representation is completely decoupled from JSON Web Algorithm (JWA) implementations through a set of simple interfaces for signing, validating, encrypting and decrypting the objects.
+
+
+== Standard JWS algorithms fully implemented, JWE algorithms on the roadmap ==
+
+The library currently ships a ready implementation of the following standard 
+algorithms:
+
+	* HMAC signatures with **HS256**, **HS384** and **HS512**.
+	
+	* RSA signatures with **RS256**, **RS384** and **RS512**.
+	
+	* EC signatures with **ES256**, **ES384** and **ES512**.
+
+
+== Example JWS object use ==
+
+Check the //examples// directory for complete Java code.
 
 {{{
-$ git clone https://bitbucket.org/nimbusds/nimbus-jose-jwt.git/wiki
+// Create JWS payload
+Payload payload = new Payload("Hello world!");
+                
+// Create JWS header with HS256 algorithm
+JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
+header.setContentType("text/plain");
+                
+// Create JWS object
+JWSObject jwsObject = new JWSObject(header, payload);
+                
+// Create HMAC signer
+String sharedKey = "a0a2abd8-6162-41c3-83d6-1cf559b46afc";
+                
+JWSSigner signer = new MACSigner(sharedKey.getBytes());
+jwsObject.sign(signer);
+                        
+// Serialise JWS object to compact format
+String s = jwsObject.serialize();
+System.out.println("Serialised JWS object: " + s);
+                
+// Parse back and check signature
+jwsObject = JWSObject.parse(s);
+
+JWSVerifier verifier = new MACVerifier(sharedKey.getBytes());
+                
+boolean validSignature = jwsObject.verify(verifier);
+
+if (validSignature)
+    System.out.println("Valid JWS signature!");
+else
+    System.out.println("Invalid JWS signature!");
+
+System.out.println("Recovered payload message: " + jwsObject.getPayload());
 }}}
 
-Wiki pages are normal files, with the .wiki extension. You can edit them locally, as well as creating new ones.
+== Related IETF drafts ==
 
-== Syntax highlighting ==
+        * [JWA] draft-ietf-jose-json-web-algorithms-05
 
-You can also highlight snippets of text, we use the excellent [[http://www.pygments.org/|Pygments]] library.
+        * [JWS] draft-ietf-jose-json-web-signature-05
 
-Here's an example of some Python code:
+        * [JWE] draft-ietf-jose-json-web-encryption-05
 
-{{{
-#!python
+        * [JWK] draft-ietf-jose-json-web-key-05
 
-def wiki_rocks(text):
-    formatter = lambda t: "funky"+t
-    return formatter(text)
-}}}
+        * [JWT] draft-ietf-oauth-json-web-token-03
 
-You can check out the source of this page to see how that's done, and make sure to bookmark [[http://pygments.org/docs/lexers/|the vast library of Pygment lexers]], we accept the 'short name' or the 'mimetype' of anything in there.
 
-Have fun!
+== Dependencies ==
+
+The Nimbus JOSE+JWT library has minimal dependencies.
+
+        * Apache Commons Codec for Base64 and Base64URL encoding and decoding.
+
+        * JSON Smart for highly efficient parsing and serialisation of JSON. 
+
+        * [optional] The BouncyCastle.org cryptography provider for Java, for 
+          ECDSA signing and validation.
