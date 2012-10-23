@@ -62,14 +62,14 @@ System.out.println("Serialised JWS object: " + s);
 // Parse back and check signature
 jwsObject = JWSObject.parse(s);
 
-JWSValidator validator = new MACValidator(sharedKey.getBytes());
+JWSVerifier verifier = new MACVerifier(sharedKey.getBytes());
                 
-boolean validSignature = jwsObject.validate(validator);
+boolean verifiedSignature = jwsObject.verify(verifier);
 
-if (validSignature)
-    System.out.println("Valid JWS signature!");
+if (verifiedSignature)
+    System.out.println("Verified JWS signature!");
 else
-    System.out.println("Invalid JWS signature!");
+    System.out.println("Bad JWS signature!");
 
 System.out.println("Recovered payload message: " + jwsObject.getPayload());
 }}}
