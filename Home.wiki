@@ -33,6 +33,10 @@ algorithms:
 	
 	* EC signatures with **ES256**, **ES384** and **ES512**.
 
+        * **RSAES-PKCS1-V1_5** encryption with AES/GCM 128 bit keys.
+
+        * **RSAES OAEP** encryption with AES/GCM 256 bit keys.
+
 
 == Example JWS object use ==
 
