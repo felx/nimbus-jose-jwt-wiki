@@ -4,8 +4,7 @@ Nimbus JOSE+JWT is a Java library that implements the **Javascript Object Signin
 
 == Supported JOSE and JWT objects ==
 
-The library supports creating, querying, serialising and parsing of the 
-following JOSE and JWT objects:
+The library supports creating, querying, serialising and parsing of the following JOSE and JWT objects:
 
 	* Plain (unsecured) JOSE objects.
 	
@@ -19,28 +18,31 @@ following JOSE and JWT objects:
 
 == Fully decoupled JOSE/JWT object representation from crypto algorithm implementation ==
 
-The JOSE and JWT object representation is completely decoupled from JSON Web Algorithm (JWA) implementations through a set of simple interfaces for signing, verifying, encrypting and decrypting the objects.
+The JOSE and JWT object representation is completely decoupled from JSON Web Algorithm (JWA) implementations through a set of simple interfaces for signing, verifying, encrypting and decrypting the objects. Developers can use the standard algorithm implementations or plug their own.
 
 
-== Standard JWS algorithms fully implemented, JWE algorithms on the roadmap ==
+== All standard JWS and JWE RSA-based algorithms fully implemented ==
 
 The library currently ships a ready implementation of the following standard 
 algorithms:
 
-	* HMAC signatures with **HS256**, **HS384** and **HS512**.
+	* HMAC signatures with HS256, HS384 and HS512.
 	
-	* RSA signatures with **RS256**, **RS384** and **RS512**.
+	* RSA signatures with RS256, RS384 and RS512.
 	
-	* EC signatures with **ES256**, **ES384** and **ES512**.
+	* EC signatures with ES256, ES384 and ES512.
 
-        * **RSAES-PKCS1-V1_5** encryption with AES/GCM 128 bit keys.
+        * RSAES-PKCS1-V1_5 encryption with A128CBC+HS256, A256CBC+HS512, A128GCM and A256GCM.
 
-        * **RSAES OAEP** encryption with AES/GCM 256 bit keys.
+        * RSAES OAEP encryption with A128CBC+HS256, A256CBC+HS512, A128GCM and A256GCM.
 
+        * JWE Compression with DEFLATE.
+
+AES Key Wray and ECDH-ES encryption is on the roadmap, you're welcome to contribute in their development.
 
 == Example JWS object use ==
 
-Check the //examples// directory for complete Java code.
+Check the //examples// directory for the complete Java code.
 
 {{{
 // Create JWS payload
@@ -76,6 +78,93 @@ else
     System.out.println("Bad JWS signature!");
 
 System.out.println("Recovered payload message: " + jwsObject.getPayload());
+}}}
+
+
+== Example encrypted JWT ==
+
+Check out //src/test/java/com/nimbusds/jwt/EncryptedJWTTest.java// for the complete code.
+
+{{{
+// Compose the JWT claims set
+JWTClaimsSet jwtClaims = new JWTClaimsSet();
+jwtClaims.setIssuer("https://openid.net");
+jwtClaims.setSubject("alice");
+List<String> aud = new ArrayList<String>();
+aud.add("https://app-one.com");
+aud.add("https://app-two.com");
+jwtClaims.setAudience(aud);
+// Set expiration in 10 minutes
+jwtClaims.setExpirationTime(new Date(new Date().getTime() + 1000*60*10));
+jwtClaims.setNotBeforeTime(new Date());
+jwtClaims.setIssueTime(new Date());
+jwtClaims.setJWTID(UUID.randomUUID().toString());
+
+System.out.println(jwtClaims.toJSONObject());
+// Produces 
+// { 
+//   "iss" : "https:\/\/openid.net",
+//   "sub" : "alice",
+//   "aud" : [ "https:\/\/app-one.com" , "https:\/\/app-two.com" ],
+//   "exp" : 1364293137871,
+//   "nbf" : 1364292537871,
+//   "iat" : 1364292537871,
+//   "jti" : "165a7bab-de06-4695-a2dd-9d8d6b40e443"
+// }
+
+// Request JWT encrypted with RSA-OAEP and 128-bit AES/GCM
+JWEHeader header = new JWEHeader(JWEAlgorithm.RSA_OAEP, EncryptionMethod.A128GCM);
+
+
+// Create the encrypted JWT object
+EncryptedJWT jwt = new EncryptedJWT(header, jwtClaims);
+
+
+// Create an encrypter with the specified public RSA key
+RSAEncrypter encrypter = new RSAEncrypter(publicKey);
+
+// Do the actual encryption
+jwt.encrypt(encrypter);
+
+// Serialise to JWT compact form
+String jwtString = jwt.serialize();
+
+System.out.println(jwtString);
+// Produces 
+//
+// eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkExMjhHQ00ifQ.K52jFwAQJH-
+// DxMhtaq7sg5tMuot_mT5dm1DR_01wj6ZUQQhJFO02vPI44W5nDjC5C_v4p
+// W1UiJa3cwb5y2Rd9kSvb0ZxAqGX9c4Z4zouRU57729ML3V05UArUhck9Zv
+// ssfkDW1VclingL8LfagRUs2z95UkwhiZyaKpmrgqpKX8azQFGNLBvEjXnx
+// -xoDFZIYwHOno290HOpig3aUsDxhsioweiXbeLXxLeRsivaLwUWRUZfHRC
+// _HGAo8KSF4gQZmeJtRgai5mz6qgbVkg7jPQyZFtM5_ul0UKHE2y0AtWm8I
+// zDE_rbAV14OCRZJ6n38X5urVFFE5sdphdGsNlA.gjI_RIFWZXJwaO9R.oa
+// E5a-z0N1MW9FBkhKeKeFa5e7hxVXOuANZsNmBYYT8G_xlXkMD0nz4fIaGt
+// uWd3t9Xp-kufvvfD-xOnAs2SBX_Y1kYGPto4mibBjIrXQEjDsKyKwndxzr
+// utN9csmFwqWhx1sLHMpJkgsnfLTi9yWBPKH5Krx23IhoDGoSfqOquuhxn0
+// y0WkuqH1R3z-fluUs6sxx9qx6NFVS1NRQ-LVn9sWT5yx8m9AQ_ng8MBWz2
+// BfBTV0tjliV74ogNDikNXTAkD9rsWFV0IX4IpA.sOLijuVySaKI-FYUaBy
+// wpg
+
+
+// Parse back
+jwt = EncryptedJWT.parse(jwtString);
+
+// Create an decrypter with the specified private RSA key
+RSADecrypter decrypter = new RSADecrypter(privateKey);
+
+// Decrypt
+jwt.decrypt(decrypter);
+
+
+// Retrieve JWT claims
+System.out.println(jwt.getJWTClaimsSet().getIssuer());;
+System.out.println(jwt.getJWTClaimsSet().getSubject());
+System.out.println(jwt.getJWTClaimsSet().getAudience().size());
+System.out.println(jwt.getJWTClaimsSet().getExpirationTime());
+System.out.println(jwt.getJWTClaimsSet().getNotBeforeTime());
+System.out.println(jwt.getJWTClaimsSet().getIssueTime());
+System.out.println(jwt.getJWTClaimsSet().getJWTID());
 }}}
 
 == JavaDocs are your friend ==
@@ -133,12 +222,15 @@ not been implemented yet (most JWE algorithms).
 
 == Acknowledgements ==
 
-        * Axel Nennker and the guys behind OpenInfoCard.
-        * Justin Richer from MITRE.
+        * Axel Nennker and the guys behind OpenInfoCard for providing much of the initial code.
+        * Justin Richer from MITRE for handling releases to Maven Central, JPSK support, numerous fixes and suggestions.
+        * Ville Kurkinen for adding initial Maven support.
+        * David Ortiz for initiating RSA encryption development.
+        * Juraj Somorovsky for security related reviews and improvements.
+        * Lai Xin Chu for initial work on JWE.
+        * CertiVox UK for supporting the library development.
         * Everyone on the JOSE IETF WG list.
-        * Ville Kurkinen for adding Maven support.
-        * CertiVox UK for supporting the development.
-
+        * NimbusDS QA.
 
 == To post bug reports and suggestions ==
 
