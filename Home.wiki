@@ -205,6 +205,13 @@ The Nimbus JOSE+JWT library has minimal dependencies.
         * XMPP
 
 
+== JWK generator ==
+
+A generator for symmetric and RSA - based JSON Web Keys (JWKs), including a command-line utility, is available at 
+
+https://github.com/mitreid-connect/json-web-key-generator
+
+
 == About us ==
 
 The principal maintainer of this library is Nimbus Directory Services 
