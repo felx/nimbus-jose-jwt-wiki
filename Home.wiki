@@ -28,7 +28,7 @@ algorithms:
 
 	* HMAC integrity with HS256, HS384 and HS512.
 	
-	* RSA signatures with RS256, RS384 and RS512.
+	* RSASSA-PKCS1-V1_5 signatures with RS256, RS384 and RS512.
 	
 	* EC signatures with ES256, ES384 and ES512.
 
@@ -174,15 +174,15 @@ The library code comes with complete JavaDocs which can help you discover and ma
 
 == Related IETF drafts ==
 
-        * [JWA] draft-ietf-jose-json-web-algorithms-10
+        * [JWA] draft-ietf-jose-json-web-algorithms-11
 
-        * [JWS] draft-ietf-jose-json-web-signature-10
+        * [JWS] draft-ietf-jose-json-web-signature-11
 
-        * [JWE] draft-ietf-jose-json-web-encryption-10
+        * [JWE] draft-ietf-jose-json-web-encryption-11
 
-        * [JWK] draft-ietf-jose-json-web-key-10
+        * [JWK] draft-ietf-jose-json-web-key-11
 
-        * [JWT] draft-ietf-oauth-json-web-token-07
+        * [JWT] draft-ietf-oauth-json-web-token-08
 
 
 == Dependencies ==
