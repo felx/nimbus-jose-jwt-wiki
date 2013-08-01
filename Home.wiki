@@ -237,8 +237,9 @@ The library has received numerous contributions and is now on the way to have al
         * Lai Xin Chu for initial work on JWE.
         * Wisgary Torres from the Microsoft Xbox team for important feedback and bug reports.
         * CertiVox UK for supporting the library development.
-        * Everyone on the JOSE IETF WG list.
+        * Everyone on the JOSE IETF WG.
         * NimbusDS QA.
+        * Countless other contributors of bug reports, fixes and suggestions.
 
 == To post bug reports and suggestions ==
 
