@@ -32,11 +32,11 @@ algorithms:
 	
 	* EC signatures with ES256, ES384 and ES512.
 
-        * RSAES-PKCS1-V1_5 encryption with A128CBC-HS256, A256CBC-HS512, A128GCM and A256GCM.
+        * RSAES-PKCS1-V1_5 encryption with A128CBC-HS256, A192CBC-HS384, A256CBC-HS512, A128GCM, A192GCM and A256GCM.
 
-        * RSAES OAEP encryption with A128CBC-HS256, A256CBC-HS512, A128GCM and A256GCM.
+        * RSAES OAEP encryption with A128CBC-HS256, A192CBC-HS384, A256CBC-HS512, A128GCM, A192GCM and A256GCM.
 
-        * Direct shared symmetric key encryption with A128CBC-HS256, A256CBC-HS512, A128GCM and A256GCM.
+        * Direct shared symmetric key encryption with A128CBC-HS256, A192CBC-HS384, A256CBC-HS512, A128GCM, A192GCM and A256GCM.
 
         * JWE Compression with DEFLATE.
 
@@ -174,15 +174,15 @@ The library code comes with complete JavaDocs which can help you discover and ma
 
 == Related IETF drafts ==
 
-        * [JWA] draft-ietf-jose-json-web-algorithms-12
+        * [JWA] draft-ietf-jose-json-web-algorithms-14
 
-        * [JWS] draft-ietf-jose-json-web-signature-12
+        * [JWS] draft-ietf-jose-json-web-signature-14
 
-        * [JWE] draft-ietf-jose-json-web-encryption-12
+        * [JWE] draft-ietf-jose-json-web-encryption-14
 
-        * [JWK] draft-ietf-jose-json-web-key-12
+        * [JWK] draft-ietf-jose-json-web-key-14
 
-        * [JWT] draft-ietf-oauth-json-web-token-10
+        * [JWT] draft-ietf-oauth-json-web-token-11
 
 
 == Dependencies ==
@@ -233,7 +233,7 @@ The library has received numerous contributions and is now on the way to have al
         * Justin Richer from MITRE for handling releases to Maven Central, JPSK support, numerous improvements, fixes and suggestions.
         * Ville Kurkinen for adding initial Maven support.
         * David Ortiz for initiating RSA encryption development.
-        * Juraj Somorovsky for security related reviews and improvements.
+        * Juraj Somorovsky for security related reviews, improvements and suggestions.
         * Lai Xin Chu for initial work on JWE.
         * Wisgary Torres from the Microsoft Xbox team for important feedback and bug reports.
         * CertiVox UK for supporting the library development.
