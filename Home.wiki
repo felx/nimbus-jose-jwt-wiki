@@ -1,6 +1,6 @@
 = Nimbus JOSE+JWT =
 
-Nimbus JOSE+JWT is a Java library that implements the **Javascript Object Signing and Encryption (JOSE)** spec suite and the closely related **JSON Web Token (JWT)** spec. 
+Nimbus JOSE+JWT is an open source (Apache 2.0) Java library that implements the **Javascript Object Signing and Encryption (JOSE)** spec suite and the closely related **JSON Web Token (JWT)** spec. 
 
 == Supported JOSE and JWT objects ==
 
@@ -214,6 +214,11 @@ The Nimbus JOSE+JWT library has minimal dependencies.
 A generator for symmetric and RSA - based JSON Web Keys (JWKs), including a command-line utility, is available at 
 
 https://github.com/mitreid-connect/json-web-key-generator
+
+
+== Licensing ==
+
+The library source code is provided under the Apache 2.0 licence.
 
 
 == About us ==
