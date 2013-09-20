@@ -174,13 +174,13 @@ The library code comes with complete JavaDocs which can help you discover and ma
 
 == Related IETF drafts ==
 
-        * [JWA] draft-ietf-jose-json-web-algorithms-14
+        * [JWA] draft-ietf-jose-json-web-algorithms-16
 
-        * [JWS] draft-ietf-jose-json-web-signature-14
+        * [JWS] draft-ietf-jose-json-web-signature-16
 
-        * [JWE] draft-ietf-jose-json-web-encryption-14
+        * [JWE] draft-ietf-jose-json-web-encryption-16
 
-        * [JWK] draft-ietf-jose-json-web-key-14
+        * [JWK] draft-ietf-jose-json-web-key-16
 
         * [JWT] draft-ietf-oauth-json-web-token-11
 
