@@ -200,6 +200,17 @@ The Nimbus JOSE+JWT library has minimal dependencies.
         * [optional] The BouncyCastle.org cryptography provider for Java, for 
           ECDSA signing and verification.
 
+For Maven add:
+{{{
+#!xml
+<dependency>
+    <groupId>com.nimbusds</groupId>
+    <artifactId>nimbus-jose-jwt</artifactId>
+    <version>2.18.2</version>
+</dependency>
+}}}
+
+
 == Uses ==
 
         * JWT bearer tokens in OAuth 2.0
