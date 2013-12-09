@@ -44,9 +44,7 @@ algorithms:
 
 AES Key Wray and ECDH-ES encryption is on the roadmap, you're welcome to contribute in their development.
 
-== Example JWS object use ==
-
-Check the //examples// directory for the complete Java code.
+== Example JWS object - sign and verify ==
 
 {{{
 // Create JWS payload
@@ -85,7 +83,7 @@ System.out.println("Recovered payload message: " + jwsObject.getPayload());
 }}}
 
 
-== Example encrypted JWT ==
+== Example encrypted JWT - encrypt and decrypt ==
 
 Check out //src/test/java/com/nimbusds/jwt/EncryptedJWTTest.java// for the complete code.
 
