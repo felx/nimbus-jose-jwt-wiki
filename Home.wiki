@@ -166,6 +166,22 @@ System.out.println(jwt.getJWTClaimsSet().getIssueTime());
 System.out.println(jwt.getJWTClaimsSet().getJWTID());
 }}}
 
+== Additional examples ==
+
+Create, sign and verify JSON Web Signature (JWS) objects:
+
+JWS with any payload:
+
+* [[JWS with HMAC protection]]
+* [[JWS with RS signature]]
+* [[JWS with EC signature]]
+
+Signed JSON Web Token (JWT):
+
+* [[JWT with HMAC protection]]
+* [[JWT with RS signature]]
+* [[JWT with EC signature]]
+
 == JavaDocs are your friend ==
 
 The library code comes with complete JavaDocs which can help you discover and make use of many special features. The JavaDocs are included in the download package. You can also browse them online.
