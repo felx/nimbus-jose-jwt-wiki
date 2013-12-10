@@ -2,7 +2,9 @@ This example is taken from **com.nimbusds.jose.crypto.RSASSATest**.
 
 It demonstrates how to create, sign and verify JSON Web Signature (JWS) objects protected by means of an RSA signature ([RFC 3447](http://www.ietf.org/rfc/rfc3447.txt)). In this case the payload is a simple string but can also be a JSON string or a BASE64 encoded binary blob.
 
-The public key can be communicated through the "jku" or "jwk" header parameters, or through some other mean before the JWS object is communicated.
+The generated RSA keys should be of sufficient length to guarantee better protection. RSA recommends a key size of at least 1024 bits.
+
+The public key can be communicated through the "jwk", "jku", "x5u" and/or "x5c" JWS header parameters, or through some other mean before the JWS object is communicated.
 
     // RSA signatures require a public and private RSA key pair,
     // the public key must be made known to the JWS recipient in
