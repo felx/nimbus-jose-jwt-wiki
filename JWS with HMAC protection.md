@@ -2,6 +2,12 @@ This example is taken from **com.nimbusds.jose.crypto.MACTest**.
 
 It demonstrates how to create and verify JSON Web Signature (JWS) protected objects. In this case the payload is a simple "Hello, world!" string but can also be a JSON string or a BASE64 encoded binary array.
 
+The Nimbus JOSE+JWT library supports all standard MAC-based algorithms. They have the following JWS algorithm identifiers:
+
+* JWSAlgorithm.HS256 - HMAC with SHA-256
+* JWSAlgorithm.HS384 - HMAC with SHA-384
+* JWSAlgorithm.HS512 - HMAC with SHA-512
+
 Note that MAC protection requires producer and recipient to posses a shared secret, negotiated through some out-of-band mechanism before the JWS object is communicated.
 
 
