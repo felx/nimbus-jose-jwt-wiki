@@ -173,13 +173,13 @@ Create, sign and verify JSON Web Signature (JWS) objects:
 JWS with any payload:
 
 * [[JWS with HMAC protection]]
-* [[JWS with RS signature]]
+* [[JWS with RSA signature]]
 * [[JWS with EC signature]]
 
 Signed JSON Web Token (JWT):
 
 * [[JWT with HMAC protection]]
-* [[JWT with RS signature]]
+* [[JWT with RSA signature]]
 * [[JWT with EC signature]]
 
 == JavaDocs are your friend ==
