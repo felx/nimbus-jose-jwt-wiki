@@ -6,9 +6,9 @@ The employed EC keys should be of sufficient length to match the required protec
 
 The Nimbus JOSE+JWT library supports all standard EC digital signature algorithms. They have the following JWS algorithm identifiers:
 
-    JWSAlgorithm.ES256 - EC DSA with SHA-256
-    JWSAlgorithm.ES384 - EC DSA with SHA-384
-    JWSAlgorithm.ES512 - EC DSA with SHA-512
+* JWSAlgorithm.ES256 - EC DSA with SHA-256
+* JWSAlgorithm.ES384 - EC DSA with SHA-384
+* JWSAlgorithm.ES512 - EC DSA with SHA-512
 
 
 The public key can be communicated through the "jwk", "jku", "x5u" and/or "x5c" JWS header parameters, or through some other mean before the JWS object is communicated.
