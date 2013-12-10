@@ -47,6 +47,7 @@ AES Key Wray and ECDH-ES encryption is on the roadmap, you're welcome to contrib
 == Example JWS object - sign and verify ==
 
 {{{
+#!java
 // Create JWS payload
 Payload payload = new Payload("Hello world!");
                 
@@ -88,6 +89,7 @@ System.out.println("Recovered payload message: " + jwsObject.getPayload());
 Check out //src/test/java/com/nimbusds/jwt/EncryptedJWTTest.java// for the complete code.
 
 {{{
+#!java
 // Compose the JWT claims set
 JWTClaimsSet jwtClaims = new JWTClaimsSet();
 jwtClaims.setIssuer("https://openid.net");
