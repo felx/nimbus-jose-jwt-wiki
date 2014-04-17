@@ -13,7 +13,7 @@ objects (in compact format):
 
 ## Documentation
 
-The library comes with complete JavaDocs and many examples.
+The library comes with a detailed datasheet of the supported algorithms, complete JavaDocs and many examples.
 
 * [Nimbus JOSE+JWT library documentation](http://connect2id.com/products/nimbus-jose-jwt)
 
